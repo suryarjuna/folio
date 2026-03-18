@@ -1,0 +1,17 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(git -C /Users/suryarjuna/PycharmProjects/folio config --local --list)",
+      "Bash(wc -l /Users/suryarjuna/PycharmProjects/folio/src/**/*.ts /Users/suryarjuna/PycharmProjects/folio/src/**/*.tsx)",
+      "Bash(git -C /Users/suryarjuna/PycharmProjects/folio log --oneline)",
+      "Bash(npx tsc:*)",
+      "Bash(git config:*)",
+      "Bash(git rm:*)",
+      "Bash(sips:*)",
+      "Bash(python3:*)",
+      "Bash(/opt/anaconda3/bin/python3 scripts/generate_icons.py 2>&1)",
+      "Bash(/opt/anaconda3/bin/python3 -c \"\nimport base64\nfrom PIL import Image\nimport io\nimg = Image.open\\('/Users/suryarjuna/PycharmProjects/folio/assets/icon.png'\\)\nimg = img.resize\\(\\(144, 144\\), Image.LANCZOS\\)\nbuf = io.BytesIO\\(\\)\nimg.save\\(buf, format='PNG', optimize=True\\)\nb64 = base64.b64encode\\(buf.getvalue\\(\\)\\).decode\\(\\)\nprint\\(f'data:image/png;base64,{b64}'\\)\n\" 2>&1)",
+      "Bash(open:*)"
+    ]
+  }
+}
