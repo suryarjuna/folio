@@ -1,12 +1,10 @@
 # Folio — Coupon Wallet
 
-A smart, offline-first coupon wallet app built with React Native and Expo. Scan, organize, and never let a coupon expire again.
-
 <p align="center">
-  <img src="assets/icon.png" alt="Folio App Icon" width="150" />
+  <img src="docs/social-preview.png" alt="Folio — Your Smart Coupon Wallet" width="100%" />
 </p>
 
-The app icon features a **white wallet** on a vibrant green background with a **gold coupon ticket** peeking out — complete with perforation dots and a `%` symbol — instantly communicating what Folio is about.
+A smart, offline-first coupon wallet app built with React Native and Expo. Scan, organize, and never let a coupon expire again.
 
 ## Features
 
@@ -205,7 +203,7 @@ Coupon cards mimic physical vouchers — echoing the wallet-and-ticket motif fro
 
 Folio is fully offline. No data leaves your device. No analytics, no ads, no accounts.
 
-Read the full [Privacy Policy](https://suryarjuna.github.io/folio/).
+Read the full [Privacy Policy](https://suryarjuna.github.io/folio/privacy-policy.html).
 
 ## Contributing
 
