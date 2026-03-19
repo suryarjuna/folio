@@ -3,28 +3,34 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Privacy Policy — Folio</title>
+  <title>Folio — Your Smart Coupon Wallet</title>
+  <meta name="description" content="Folio is a free, offline-first coupon wallet app. Scan, organize, and never miss a deal again. No accounts, no tracking, no ads.">
   <style>
     :root {
       --green: #1DB954;
+      --green-dark: #17a34a;
       --green-light: #e8f8ee;
       --gold: #FFD700;
+      --coral: #FF6B6B;
       --text: #1a1a1a;
       --text-secondary: #555;
+      --text-muted: #888;
       --bg: #fafaf8;
       --surface: #ffffff;
       --border: #e8e8e4;
       --radius: 16px;
+      --radius-lg: 24px;
     }
 
     @media (prefers-color-scheme: dark) {
       :root {
         --text: #f0f0f0;
         --text-secondary: #9ca3af;
-        --bg: #111111;
+        --text-muted: #6b7280;
+        --bg: #0a0a0a;
         --surface: #1c1c1e;
         --border: #2c2c2e;
-        --green-light: #122a1a;
+        --green-light: #0d2818;
       }
     }
 
@@ -36,346 +42,656 @@
       color: var(--text);
       line-height: 1.7;
       -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
     }
 
-    /* ── Header ── */
-    header {
-      text-align: center;
-      padding: 56px 24px 40px;
+    /* ── Navigation ── */
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      background: rgba(250, 250, 248, 0.85);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
       border-bottom: 1px solid var(--border);
+      padding: 0 24px;
     }
 
-    .logo {
-      width: 72px;
-      height: 72px;
-      border-radius: 18px;
+    @media (prefers-color-scheme: dark) {
+      nav { background: rgba(10, 10, 10, 0.85); }
+    }
+
+    .nav-inner {
+      max-width: 1080px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 60px;
+    }
+
+    .nav-brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+      color: var(--text);
+      font-weight: 700;
+      font-size: 18px;
+    }
+
+    .nav-brand img {
+      width: 32px;
+      height: 32px;
+      border-radius: 8px;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 28px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      color: var(--text-secondary);
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 500;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover { color: var(--green); }
+
+    /* ── Hero ── */
+    .hero {
+      text-align: center;
+      padding: 140px 24px 80px;
+      max-width: 720px;
+      margin: 0 auto;
+    }
+
+    .hero-badge {
+      display: inline-block;
+      background: var(--green-light);
+      color: var(--green);
+      font-size: 13px;
+      font-weight: 600;
+      padding: 6px 16px;
+      border-radius: 20px;
+      margin-bottom: 24px;
+      border: 1px solid rgba(29, 185, 84, 0.2);
+    }
+
+    .hero h1 {
+      font-size: clamp(36px, 6vw, 56px);
+      font-weight: 800;
+      letter-spacing: -1.5px;
+      line-height: 1.1;
       margin-bottom: 20px;
-      box-shadow: 0 4px 20px rgba(29, 185, 84, 0.2);
     }
 
-    header h1 {
-      font-size: 28px;
+    .hero h1 .highlight {
+      background: linear-gradient(135deg, var(--green), #15803d);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .hero p {
+      font-size: 18px;
+      color: var(--text-secondary);
+      max-width: 520px;
+      margin: 0 auto 36px;
+      line-height: 1.6;
+    }
+
+    .hero-cta {
+      display: flex;
+      gap: 12px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 14px 28px;
+      border-radius: 12px;
+      font-size: 15px;
+      font-weight: 600;
+      text-decoration: none;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    .btn:hover {
+      transform: translateY(-1px);
+    }
+
+    .btn-primary {
+      background: var(--green);
+      color: #fff;
+      box-shadow: 0 4px 16px rgba(29, 185, 84, 0.3);
+    }
+
+    .btn-primary:hover {
+      box-shadow: 0 6px 24px rgba(29, 185, 84, 0.4);
+    }
+
+    .btn-secondary {
+      background: var(--surface);
+      color: var(--text);
+      border: 1px solid var(--border);
+    }
+
+    .hero-note {
+      margin-top: 20px;
+      font-size: 13px;
+      color: var(--text-muted);
+    }
+
+    /* ── Problem Section ── */
+    .problem {
+      padding: 80px 24px;
+      text-align: center;
+    }
+
+    .problem-inner {
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    .problem h2 {
+      font-size: clamp(24px, 4vw, 36px);
       font-weight: 700;
       letter-spacing: -0.5px;
-      margin-bottom: 6px;
-    }
-
-    header p {
-      color: var(--text-secondary);
-      font-size: 14px;
-    }
-
-    /* ── Main content ── */
-    main {
-      max-width: 640px;
-      margin: 0 auto;
-      padding: 40px 24px 80px;
-    }
-
-    section {
-      margin-bottom: 40px;
-    }
-
-    h2 {
-      font-size: 20px;
-      font-weight: 700;
       margin-bottom: 16px;
-      letter-spacing: -0.3px;
     }
 
-    h3 {
-      font-size: 16px;
-      font-weight: 600;
-      margin-bottom: 10px;
-      margin-top: 20px;
+    .problem p {
+      font-size: 17px;
+      color: var(--text-secondary);
+      max-width: 600px;
+      margin: 0 auto;
+      line-height: 1.7;
     }
 
-    p, li {
-      font-size: 15px;
+    .stats-row {
+      display: flex;
+      justify-content: center;
+      gap: 48px;
+      margin-top: 48px;
+      flex-wrap: wrap;
+    }
+
+    .stat {
+      text-align: center;
+    }
+
+    .stat-number {
+      font-size: 42px;
+      font-weight: 800;
+      color: var(--green);
+      letter-spacing: -1px;
+      line-height: 1;
+    }
+
+    .stat-label {
+      font-size: 14px;
+      color: var(--text-muted);
+      margin-top: 6px;
+    }
+
+    /* ── Features ── */
+    .features {
+      padding: 80px 24px;
+    }
+
+    .features-inner {
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+
+    .features-header {
+      text-align: center;
+      margin-bottom: 56px;
+    }
+
+    .features-header h2 {
+      font-size: clamp(24px, 4vw, 36px);
+      font-weight: 700;
+      letter-spacing: -0.5px;
+      margin-bottom: 12px;
+    }
+
+    .features-header p {
+      font-size: 17px;
       color: var(--text-secondary);
     }
 
-    p {
-      margin-bottom: 12px;
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 20px;
     }
 
-    ul {
-      list-style: none;
-      padding: 0;
-      margin-bottom: 12px;
+    .feature-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 28px 24px;
+      transition: transform 0.2s, box-shadow 0.2s;
     }
 
-    ul li {
-      position: relative;
-      padding-left: 20px;
+    .feature-card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 32px rgba(0,0,0,0.06);
+    }
+
+    .feature-icon {
+      width: 48px;
+      height: 48px;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 24px;
+      margin-bottom: 16px;
+    }
+
+    .feature-icon.green { background: var(--green-light); }
+    .feature-icon.gold { background: #fef9e7; }
+    .feature-icon.coral { background: #fef2f2; }
+    .feature-icon.blue { background: #eff6ff; }
+    .feature-icon.purple { background: #f5f3ff; }
+    .feature-icon.teal { background: #f0fdfa; }
+
+    @media (prefers-color-scheme: dark) {
+      .feature-icon.gold { background: #2a2510; }
+      .feature-icon.coral { background: #2a1010; }
+      .feature-icon.blue { background: #0f172a; }
+      .feature-icon.purple { background: #1a1033; }
+      .feature-icon.teal { background: #0a2520; }
+    }
+
+    .feature-card h3 {
+      font-size: 17px;
+      font-weight: 700;
       margin-bottom: 8px;
     }
 
-    ul li::before {
-      content: '';
-      position: absolute;
-      left: 0;
-      top: 10px;
-      width: 6px;
-      height: 6px;
-      border-radius: 50%;
-      background: var(--green);
+    .feature-card p {
+      font-size: 14px;
+      color: var(--text-secondary);
+      line-height: 1.6;
     }
 
-    strong {
-      color: var(--text);
-      font-weight: 600;
+    /* ── How It Works ── */
+    .how-it-works {
+      padding: 80px 24px;
+      background: var(--surface);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
     }
 
-    a {
-      color: var(--green);
-      text-decoration: none;
-      font-weight: 500;
+    .how-inner {
+      max-width: 800px;
+      margin: 0 auto;
     }
 
-    a:hover { text-decoration: underline; }
-
-    /* ── Callout card ── */
-    .callout {
-      background: var(--green-light);
-      border: 1px solid var(--green);
-      border-radius: var(--radius);
-      padding: 20px 24px;
-      margin-bottom: 32px;
+    .how-header {
+      text-align: center;
+      margin-bottom: 56px;
     }
 
-    .callout p {
-      color: var(--text);
-      margin: 0;
-      font-size: 15px;
-      font-weight: 500;
-    }
-
-    .callout .badge {
-      display: inline-block;
-      background: var(--green);
-      color: #fff;
-      font-size: 11px;
+    .how-header h2 {
+      font-size: clamp(24px, 4vw, 36px);
       font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 0.6px;
-      padding: 3px 8px;
-      border-radius: 6px;
-      margin-bottom: 10px;
-    }
-
-    /* ── Permissions table ── */
-    .permissions-grid {
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
+      letter-spacing: -0.5px;
       margin-bottom: 12px;
     }
 
-    .perm-row {
-      display: flex;
-      align-items: flex-start;
-      gap: 14px;
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      padding: 14px 16px;
+    .how-header p {
+      font-size: 17px;
+      color: var(--text-secondary);
     }
 
-    .perm-icon {
-      font-size: 22px;
+    .steps {
+      display: flex;
+      flex-direction: column;
+      gap: 32px;
+    }
+
+    .step {
+      display: flex;
+      gap: 20px;
+      align-items: flex-start;
+    }
+
+    .step-number {
+      width: 44px;
+      height: 44px;
+      border-radius: 12px;
+      background: var(--green);
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+      font-weight: 800;
       flex-shrink: 0;
-      width: 32px;
+    }
+
+    .step-content h3 {
+      font-size: 17px;
+      font-weight: 700;
+      margin-bottom: 4px;
+    }
+
+    .step-content p {
+      font-size: 15px;
+      color: var(--text-secondary);
+    }
+
+    /* ── Privacy Banner ── */
+    .privacy-banner {
+      padding: 80px 24px;
       text-align: center;
     }
 
-    .perm-content {
-      flex: 1;
+    .privacy-card {
+      max-width: 700px;
+      margin: 0 auto;
+      background: var(--green-light);
+      border: 1px solid rgba(29, 185, 84, 0.25);
+      border-radius: var(--radius-lg);
+      padding: 48px 40px;
     }
 
-    .perm-name {
-      font-size: 14px;
+    .privacy-card h2 {
+      font-size: 28px;
+      font-weight: 700;
+      margin-bottom: 16px;
+      letter-spacing: -0.5px;
+    }
+
+    .privacy-card p {
+      font-size: 16px;
+      color: var(--text-secondary);
+      max-width: 500px;
+      margin: 0 auto 28px;
+      line-height: 1.6;
+    }
+
+    .privacy-badges {
+      display: flex;
+      justify-content: center;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    .privacy-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 10px 16px;
+      font-size: 13px;
       font-weight: 600;
       color: var(--text);
-      margin-bottom: 2px;
     }
 
-    .perm-desc {
-      font-size: 13px;
+    .privacy-badge .check {
+      color: var(--green);
+      font-size: 16px;
+    }
+
+    .privacy-link {
+      display: inline-block;
+      margin-top: 24px;
+      font-size: 14px;
+      color: var(--green);
+      text-decoration: none;
+      font-weight: 600;
+    }
+
+    .privacy-link:hover { text-decoration: underline; }
+
+    /* ── Open Source ── */
+    .open-source {
+      padding: 80px 24px;
+      text-align: center;
+    }
+
+    .open-source h2 {
+      font-size: clamp(24px, 4vw, 32px);
+      font-weight: 700;
+      letter-spacing: -0.5px;
+      margin-bottom: 12px;
+    }
+
+    .open-source p {
+      font-size: 16px;
       color: var(--text-secondary);
-      line-height: 1.5;
-      margin: 0;
-    }
-
-    /* ── Divider ── */
-    hr {
-      border: none;
-      border-top: 1px solid var(--border);
-      margin: 40px 0;
+      max-width: 500px;
+      margin: 0 auto 28px;
     }
 
     /* ── Footer ── */
     footer {
       text-align: center;
-      padding: 32px 24px 48px;
+      padding: 40px 24px 56px;
       border-top: 1px solid var(--border);
     }
 
-    footer p {
-      font-size: 13px;
-      color: var(--text-secondary);
+    .footer-links {
+      display: flex;
+      justify-content: center;
+      gap: 24px;
+      list-style: none;
+      margin-bottom: 16px;
     }
 
-    footer a {
-      font-weight: 600;
+    .footer-links a {
+      color: var(--text-secondary);
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 500;
+    }
+
+    .footer-links a:hover { color: var(--green); }
+
+    footer .copyright {
+      font-size: 13px;
+      color: var(--text-muted);
     }
 
     /* ── Responsive ── */
-    @media (max-width: 480px) {
-      header { padding: 40px 20px 32px; }
-      header h1 { font-size: 24px; }
-      main { padding: 32px 20px 64px; }
-      h2 { font-size: 18px; }
+    @media (max-width: 600px) {
+      .hero { padding: 120px 20px 60px; }
+      .hero-cta { flex-direction: column; align-items: center; }
+      .stats-row { gap: 32px; }
+      .privacy-card { padding: 32px 24px; }
+      .privacy-badges { flex-direction: column; align-items: center; }
+      .nav-links { gap: 16px; }
     }
   </style>
 </head>
 <body>
 
-  <header>
-    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAJAAAACQCAYAAADnRuK4AAAXA0lEQVR42u2de5Bc1X3nP79z7r3dPT0vvQWSwICAQjK2sTEm62wG8NqKA2UWwihbzlacFKGc9fqxVZva3VRhxsPizWOzrnhx7Mrau7HjOBU0RAoYGwRGEi571wEbKANyMAgsISFGz9G8+nXP+e0ft3s0EgJkTfdMz+h8VV1SjaZv3z7nc3+v8xKapYEBwzU7DNc+ljZ+tPbnn8pV9h28XFTfjffvUeVSvD8foRtkMUpQMyQAegRlFGN2i/A8xvxERZ7MrVr2zIuX3F2Z+t3tfRE7rvEMDvqmffSMwVm/U9g45ACW/OAjXR2l+DqsvR6vfXgukry1IqBOwSnqFXygp6kyghgBK4gVVEHLzmHYhZHHcO47k4XatsO/ev8YAJv6Lc+t05mCdOYAKQL9BsnAWbXj5ouNj24Tpx+VQrQKI2jFoVUHqh5Bs/eI1D9VQq83VZpZdNWpthYxklgkZ8ErWkr3qZW/8yb96r5rNr+QvavfwlDWP7MG0KZ+27A45z7Yf6mNuUOQm6QjKmgpRWvOg3hEDYgJfTunXHlUPKiR2BopROhkWlJ0i6tx56sfHnr+5D5tLUDb+yKufSxdtqm/s7BEbkf4pOSiop+oop5UwCLBurSrjVJwYohMMUEr6QTKl0qH9a6DG4fGG33bGoAUgQFBBv15W/uv08TcbfJ2nR+rgleHiAluaV6h5DFiTVeCL7udUvWf2rNhaBs6YGBQT9elnZ57GcAgKDLoVz9yy+0k5nsirPMjlRSPImIDPPMsbxOxeNSPVFIR1pGY761+5JbbkcEsHho4PTbeutN1wCCD/pz7b+iIioVv2GJyiztW8ahStzpB894eqUcE25MzbqJ6bzpR+tj+jzww2ej7MweofoHzt9zY67uSB00xvtofq9RAohDnLMQcTlPTk4v9RO1HZqz64d033TfyVhCZN63vNODpTraaQny1H6mkiMQBnoXp1BCJ/UglNYX4at+dbD1/y429yKBnYMD8cgBpBsjqTf0FX0y2mnx0lR+tpBiJQksvcBmJ/GglNfnoKl9Mtq7e1F+YzsTJsqd2a32WwW+4nt9fd4/pTv6VH63WMBKH1j1brJEYrria6U7OQ9xlo7//lXugL+Kx3frWAG3vi/i9x9LVD9x8u12S//d+pFJDAjxnIURWy2nNLMq/vetfX+xGP/7QDrb3RXxjt3/jILpejVy99eZfM7l4h1adQwkp+tkcWgtOEmt9pXbN3g2bv39yxVpOjHsGZMXDuwqJVJ6WxKzVSupAbGjHs5ohJ7nIatW/WNXcu4Y/dFFpeqHxeBA91G+QQR/78mdNd7xWS2ka4AkCsVpKU9Mdr419+bPIoGeo35xogerl6/O+c/MFmrfPoSQ4lZCuB9W9k2JFEapSduv3XL/55cawVkbS0E5BUI24y3TEeZz6AE/QtEhZcOpNR5zXiLsQlKGdkv1Xf79laMidt7X/ArXsxJNDlRA4B70+oBYwVMSxbs+GoZfp77eGTxyQupX6hCnGeby6AE/QKe2QV2eKcV7RTwDwiQMiAOf8+IaO6FDuJYntCk2953RH6YPONnmJjNGaG06XVi7cf+UDkwYgOpB8wBSTFZo6F+AJehMZTZ0zxWRFdCD5wPE03siNWFFUwkz3oLeIhCTLyIzcCCDrNvUno9260+TsRVpNfTvNYTZnwbofPdPZ7HN3x16SyPiK29U9Kuui8R4uF5G3ac3RLvBYFIdQ0mjBI5SIJ8bjecMB73aLpY3WHGLkbeM9XB6p+PeafGx9qTbnwxaN1ShHfI5uU2VtPEosnoVYU2g8GPvTDl5zBTokJS8ONx++qaozhcj6cu29EZ4r2+GeDUpNM6f1h73PcUvxF1wUjxGzcAFShP2uwKOlc/jCyDr2pkW6TG1+QCSA58pIRS5Rp9m3kbm7l5oacsbxzWU/4P3FA9Rt+gIuqmQWd1U0ye/07OKDHa/yO8P/kqeqi+mSNodIEXWKilxi8Lo6W2YsMpfWp0TEHy9+kvcXD1B1Bq8zCy6zrzQfvAHUUsM5UYmvLv2/9FIhNRbRdn56RMiWp682CL1zuU7doExoxLuSw/xW5y9wTkjwmDMNKQVGR2H4NaiU2x8iAWLx1JzhbR3j3Hz0KQ4fToli094W2CsIvUaMLFKnzJUDM0BZLdflXwNpTpvVatkrTedP8GRQVGDDkkO4517FVV37lnQlc2FiZFHblFpW2lLTrrV4MaxcCcUi4OcHQIIiHlZ0e+LJMqW9x5DIQDu7MoW2WWXRzKDRucz6xPFsRXZN2kNCwPsIG8dwpIK9QFATvc7lKYrT9ngyovZ5ApunkREYH4elS6Gzu9VWyIB68DP7ENHsUj4dZXTyKGNElCeLEMnx+xdBVYnE0hUVaFTOAkBNVqGQWf5crtWlAAPe4+NzqRVvQqPVgDujK6lmRmxJPuZPblyMjQ3xyq4Tnqz6vC5+cux5Hj38JIKQSISfQ4gWHkAKxa56/GNaaX0yeNLi9Uws/zpqlzblqr2L4D+f1/DFWifr+Hdr6LsH/4lPPvtFqr6GFTtnlmjhASQwdgwmJmDRIsjlW2GFMrfl8u9kYsU9IBZxR2buiCWL3w5XpeGxTvV8oMBvrPgV/rur8AfPfIGitXNmgxakC6tWoVLJAumctAKgrN5Q7fkkaooZPE1aeymShT1vpaOVY/zG8vdxRffFPD36Ih1RDj8HGduCnDy2aFGr03ifWYt4HejcrH5SIG8SLi6uoqrpnI1DLUgLpJolRdkWRtPSPGlyDzL34yVzXSVakAAdPZrFQEuWQGdX1sejR+HAfjC2Sa2u0LsYokJmhM7WZQhtDJBkrqFhRtS9Sc83zIufSuO9hyQ53tkdHbByVd0iNQkgF9cLxWfxGpY2BkizKLjR4fZNQKO+cbnJsqNTpfFRAp355t7euIVUz+41UKYtLY8C0gkrBmDNP8Cyz9RZPzmQkeOBwLn/C5LLABgbNQwPQ3X6aLwCKVmdr1mvsAShHS2QAAms+TZ0XJP9qOtmyL0L9v0eWFt3Z3WYvIc190DpSSj/DKylUnaUy1k6n0yvA4XlkgvcAglZJa3z1zJ4tJpFqJpCz+9C/pLs/xtbFnkPa/4eSk/AgT+tfxvH4sWwYgV0djJvRuMDQE0FKZn27+mDQdOG16fg+TEc+HOIoylaGvW04GHONoCULBAe3wGVn9ZBsiARjH87c1Ei4F3dbU2DR9MT0vjhYZgYJ6yzXcgxkBHBYojE1De7jzKAfBleuQGWfQ5yb4fJH8Chu+qQCay5F8pPwME/hzifRceNDWQF8o00PneSe2waTJIdiiNzH1TN9S48swaQPcWEq0lXYcyVOerzVNKj4NMsuxGg8grsufV4Gt84iePcv4Lxh+DA1yAGXPl11+0sQEcuY5EaU4OUtWpzraVbVkOTus+c5VXhWvfTqTqMmNe172xNOJsVgLwq4+nEtLbPvvz6rgvoW/IOLuy8gL7ibWgyhtVpT7nUJ2tJlMGVrMksEgYu/FA9G3u9cfAeXAomnvazClQmmztDMVdYj4kNaHHWU7xUHRihJy4ynk5mz9m0wdQOm8fMgoWUNVtvadmjI/UnoRgVuKLnYqYXgX9r1XVcv+JqEhN2ED5zI6iUXZWHDjzO3+/bNlUlU+CpYy8wkZaw0tpp7y0FyIgw6Sq8vesCtr3/L075O04dimBPZ5sBqQcyeoaz/qY1cFMar40PKbruh/+BZ8depsO2dppHNFtPip/yyTLlxIwI9kymQpzhiQty0t8LwwqBVz/tFFE9IUxYMEG0OSHICyXhZoYJ9lRtO0sZYqiSLMTYyCtaSeuzGAJAQb98jk/p54fQmmu5JQoALUS3Zg3uWInqq6NI3NrVrW00Gu+zms/86632jOmsofbaGHqhb6kVaiOA5vMR862dlqj1PyCY0/wcMYKfqOLLNchHtGoHlrkHSOv7eo5/Fya+X5+07GZ0SeeyuUCFQitzH1ApUun9Q5Ac+PGmQZRqNsJljcWr0mHziMkC4oqrZsMUqlhjyUXJG9yioM6j5RRTiLMqtSxIC1Tf13z8ATjwleyOdGZ9O3Lo+KT6YhctmxMkCmbySSaX/W/ULmqKIbMGupOsgj9WGadgcvzw8E95ZuwlVuYW07f4nSQmxqMUbH7Oe699XJjphCjKXtOmZpwJQEkBagpRnmzumWmdJUrGtxBVn6RWvAUfrUY4syUajbXxh0sxX3upm95Ckd++4iPc/vz/4a9feRBXr76/u+cSvn7FH7GmY/mcb6zQhkF0Wl+7m87oKe7qga4uWrw2vgG+wdR2kzv6P2aaeSMxHD4A/3FoDetXrWd8sfCl3VtYkSzCIIgIPzq6k08/+z+597131g9aDgA1PTyZGIPJSejthTihxcW0egxnzMwBMmCiDvKdS7FRxD37ttEbFUGVFA8Ky3O9/L8jz/Kzsd28vfsCvPqTqvwBoBmrVMpioEIB4pZv8dKkEkRjGq6meO+ZqJWQWukUO28ITpWxdHL62+Yyd1546u2F5cvn1xZ3x/EQapqyLN/L1UvWM1IbIzExRgyJiZh0Zc7JL2Z99wVTA9IBoGmpcTNkbRaLyzwcs80mXwolV+G/XPLbvKP7IvaWDjKeljhYOYZTz+cvu43uqKM+Cn+WTGk9jepH06505MjspPGtkJVsdL3sq5zfsZL73/fHfOXlf+TpYy+yIr+Y313z61y16DK86imnCZ+9AEVrmnapOM5e0UxrSrNqeQQVZbgUkTohMYZyWmFp0sNnL/3YiRGX6py7rvZxYY2nqPP67G5melyrQnd3tj9Qa3Yna1EYrtmw2nf39uK9ZBPwxKAoNU3xmu3MmmVd7eObTXvcgoPkUlh0G6QpSoTX49u5nclLspU3M7rGrLwUal6I88quAzn+5oWlxHGNrlw3sbGgEEtUn71p5jRlb2MXVq/4Lf8LqO1GJh5GcgaqM9w6d14EPRAnyisjCR/dcRHjaUItPULf2vcRGUvqHdHcnsI1HwBqDE4WkDVbee5nn+bIy3fzL1YnGE1PWK6ykOSBfeMJD77Sw589fQ7DlQJWx1jWuZyP/8q/QdG2szhtnIVlG0SpwvK3fZH/9MMqP972bZYVO8nZZMFNhG/o1cmE4cmYfFSjVjtMLirw1Y2f54LFq3Hq2yLTmicAgYhBVVlWgPtv/Us+/7338PUn/pF/PvQqzrvmrslpE8W2SsGW6Uq6uGrttQz++me4YtW6eQFP2wGUQZRt32/FcscHb+OPrvsYPxveRalWrptzXWCWKBuaWNOzktW9K+sZ2fyApy0Bypo0W2LovSO2Ce849zLOBjXWzpl5NDOzbQdTGzPyFEVVF/xeP4LMK3DaHqDpDSsSFiK2q8KynqAAUFAAKCgAFBQWAggJAQQGgoABQUFAAKCgAFBQACgoKAAUFgIICQEEBoKCgAFBQACgoABQUAAoKCgAFBYCCAkBBAaCgoABQUAAoKAAUFAAKCgAFBQWAggJAQQGgoABQUFAAKCgAFBQACgoAzVQSjvledclCOfbbIEy6MhVfC706S6qkVSarpVnZb6iln+BViU3E/vIR9pcP13/mQw+3rL09Cuw7Nsy+Y8MkNsa3eIfbliMaS8TR2hjbDz2VfckFv9fYXAKkCPDIz3/IyOQxoigC0+pz41vsKj2evEn4m1cemjpdRgNETZfW4fHq+do/DZGzCUSCyceo963ZdV3AqNejYoVW9apXpRgVeGrkBb6waxNWDKl3AaJmwoOS+hRrLP/t0b/ix688QzEqIF05TD5q/mlFiooV1OtRgzLSajPn1NETd/InL3yLb+19hNhEgJB6V/fbAaYzgcarJ/UuO0/Dxvz14//AnVvvZlFHD6l3JOd2t+68h+wY8hGDkb0ZQK0/T6Bg83zm2bv503/+FrVqlchYjJiQ5p9hacSIqZ+nkXLnw3/Jx4c+S0e+A19Jic/pIl5eRGutcF+qGAEje23Pv73s/SZn362p98fPXmpdwJVIxCOHfsKDP91G6eAoPcVuOnIFImMJFaPTszwApVqFlw6/wj1Pf5dPb/mvfOvJ++kudELFYZcUKF6+spX0epOzhqr7nqx5+Df/wOTjr/hSzWUnVrVekbGMpyWOPb+fjmHHyuJSioVidkRl2NL3LRECmKiW2D96kJHJYyQ2oTMqZG7rnC4Kly3PTpH22iIXps4UYuvLtX8XiZonfNk5ROxshSKpd3TYPF3vXEv58Div7j5E9fBr+Fqafemg0whBDImNWdzRC9Yg3QnFc7szt+W1hfAAItaXnRM1T0Sdx3hmtFt/YXL2Iq2mLXdj04tevuKJegssWnweWnH4Ug1NfTBCb2l/jqfuGMHkI0w+BuF4zNOyNlQvcWR8xf2ia1SeiXZuHKqueeg3d0jOXqgV55FZHGAV0LReWrRguhMIUdAZdKmiqZ9q09Z+mHjJWZFKumPnxnurUd0c3IfTWxGVWe9AOf5oaaoQUvoza8PZ6jZRwang9T6on5WRLq8+Gh2SYYntiiwbm6NpHsH4tLu8RNb6iepwurz6aJZZb++L9l/5wCQi35SOCJQw2hn0RgGYl44IRL65/8oHJtneFxm+vLx+0LZ82U/UyhixwY8EnRIfI9ZP1MqCfBmALy9Xw9CQY1O/3bNh6GVSt8V0xoLiQnsFnYSPM52xkLotezYMvcymfsvQkMtinf51iiKScrufrJWx9RPvg4IyeBQrxk/WypJyO4rQv06ZCpZl0DPUb/bcsPklrekXTVdsUA1WKKgOkDrTFRut6Rf33LD5JYb6DTLoT8x7FIEBWfHwrkIilaclMWu1ks7a8EZQ29LjJBdZrfoXq5p71/CHLirBoNaPtZ2WrgvK0E4Z3vC3E6ru1gwpCYWZs9151RlQdbcOb/jbCYZ2Ns5E5kSAADYOObb3RXs3bP6+H6/dYXpyEappaMez1nWlpicX+fHaHXs3bP4+2/siNg6dENq8vmB47WOOgb5o7w2b7/Ijlc2mJxejGpZUnH3w1ExPLvYjlc17b9h8FwN9Edc+9rq4WN7IcPG5AVm9fmdOetlhitFVfrSaYiQKLXsWyGtqupPIT6SP6wjX7H1uXYXPHY973twCNeIhYO/GoZKZqG7w5fRx052L8MGdnR3w5CJfTh83E9UNezcOlaYzcXoWaMoSDRhk0J+/5cZe35U8aIrx1f5YpQYShcmDCy5cVtDU9ORiP1H7kRmrfnj3TfeNNBh4o7e9+aCpDHp0wOy+6b6RdLL0AT9Zu9f25uNsZU5YIbiA4h2PoLY3H/vJ2r3pZOkDpwPPW1ughgYwDGaDrKsfueV2E9k7EURLaYqIDdZoHlsdVSeFKEJRn7o79n7w3rtO7vOZA9QIrBkQZNCft7X/Ok3M3SZv1/mxKnh1iBjChIx5hI56jFjTleDLbqdU/af2bBjahg6Y6YXC5gHU0Pa+iGsfS5dt6u8sLJHbET4puajoJ6qoJxUIFqmdsQEnhsgUE7SSTqB8qXRY7zq4cWi80be/zCXPrKM39dtGQencB/svtTF3CHKTdEQFLaVozXkQj6iZrTnWQW9IjUfFgxqJrZFChE6mJUW3uBp3vvrhoedP7tPWAzTl0voNkn3oqh03X2x8dJs4/agUolUYQSsOrbqpIC17jzTsU7BSLcijQHWqrUWMJBbJWfCKltJ9auXvvEm/uu+azS9k7+q3MORP12U1D6CpAHvAsH6nNOhd8oOPdHWU4uuw9nq89uG5SPLWioA6BafHl50ENU9GECNgBbGCKmjZOQy7MPIYzn1nslDbdvhX7x+bsjjPrVMGB2eUTTfPCgwMGK7ZYab70LU//1Susu/g5aL6brx/jyqX4v35CN0gi8MwbZMkAHoEZRRjdovwPMb8REWezK1a9syLl9xdOSGG3XGNnyk4Df1/ESsm6f1vdOgAAAAASUVORK5CYII=" alt="Folio" class="logo">
-    <h1>Privacy Policy</h1>
-    <p>Folio &mdash; Coupon Wallet &nbsp;&middot;&nbsp; Last updated March 18, 2026</p>
-  </header>
-
-  <main>
-
-    <div class="callout">
-      <span class="badge">TL;DR</span>
-      <p>Folio stores everything locally on your device. We collect zero data, have zero servers, and use zero trackers. Your coupons are yours alone.</p>
+  <!-- Navigation -->
+  <nav>
+    <div class="nav-inner">
+      <a href="#" class="nav-brand">
+        <img src="data:image/png;base64,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" alt="Folio">
+        Folio
+      </a>
+      <ul class="nav-links">
+        <li><a href="#features">Features</a></li>
+        <li><a href="#how-it-works">How It Works</a></li>
+        <li><a href="#privacy">Privacy</a></li>
+        <li><a href="https://github.com/suryarjuna/folio">GitHub</a></li>
+      </ul>
     </div>
+  </nav>
 
-    <!-- Introduction -->
-    <section>
-      <h2>Introduction</h2>
-      <p>Folio is an open-source mobile application that helps you digitize, organize, and manage coupons. We are committed to protecting your privacy. This policy explains what data Folio handles, how it is used, and your rights.</p>
-    </section>
+  <!-- Hero -->
+  <section class="hero">
+    <span class="hero-badge">Free &amp; Open Source</span>
+    <h1>Stop losing coupons.<br><span class="highlight">Start saving money.</span></h1>
+    <p>Folio is a smart, offline-first coupon wallet that scans, organizes, and reminds you before deals expire. No accounts, no tracking, no ads.</p>
+    <div class="hero-cta">
+      <a href="https://github.com/suryarjuna/folio" class="btn btn-primary">
+        <svg width="18" height="18" viewBox="0 0 16 16" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
+        View on GitHub
+      </a>
+      <a href="privacy-policy.html" class="btn btn-secondary">Privacy Policy</a>
+    </div>
+    <p class="hero-note">Available for iOS and Android via Expo</p>
+  </section>
 
-    <!-- Data Stored Locally -->
-    <section>
-      <h2>Data Stored Locally</h2>
-      <p>All data processed by Folio is stored <strong>locally on your device</strong> and is never transmitted to external servers. This includes:</p>
-      <ul>
-        <li><strong>Coupon details</strong> &mdash; company name, promo code, discount description, expiry date, categories, notes, and other metadata you enter or that is extracted via OCR.</li>
-        <li><strong>Coupon images</strong> &mdash; photographs captured via camera or imported from your photo library, along with generated thumbnails.</li>
-        <li><strong>User preferences</strong> &mdash; your nickname, notification settings, sorting preferences, and onboarding status.</li>
-      </ul>
-    </section>
+  <!-- Problem -->
+  <section class="problem">
+    <div class="problem-inner">
+      <h2>Your coupons deserve better than a junk drawer</h2>
+      <p>We've all been there: you clip a coupon, toss it in your wallet, and forget about it until it's expired. Paper coupons get lost, digital codes get buried in email, and the savings disappear.</p>
+      <div class="stats-row">
+        <div class="stat">
+          <div class="stat-number">$31B</div>
+          <div class="stat-label">in coupons go unused yearly</div>
+        </div>
+        <div class="stat">
+          <div class="stat-number">40%</div>
+          <div class="stat-label">of coupons expire before use</div>
+        </div>
+        <div class="stat">
+          <div class="stat-number">0</div>
+          <div class="stat-label">data Folio sends to the cloud</div>
+        </div>
+      </div>
+    </div>
+  </section>
 
-    <!-- Data NOT Collected -->
-    <section>
-      <h2>Data We Do Not Collect</h2>
-      <p>Folio does <strong>not</strong> collect, transmit, or share:</p>
-      <ul>
-        <li>Personal identification information (name, email, phone, address)</li>
-        <li>Location data</li>
-        <li>Analytics or usage tracking data</li>
-        <li>Advertising identifiers</li>
-        <li>Any data to third-party servers, analytics platforms, or advertisers</li>
-      </ul>
-    </section>
+  <!-- Features -->
+  <section class="features" id="features">
+    <div class="features-inner">
+      <div class="features-header">
+        <h2>Everything you need. Nothing you don't.</h2>
+        <p>A focused set of tools to make sure every coupon gets used.</p>
+      </div>
+      <div class="features-grid">
 
-    <!-- Device Permissions -->
-    <section>
-      <h2>Device Permissions</h2>
-      <p>Folio requests the following permissions, used <strong>only</strong> for the stated purposes:</p>
-      <div class="permissions-grid">
-        <div class="perm-row">
-          <div class="perm-icon">&#128247;</div>
-          <div class="perm-content">
-            <div class="perm-name">Camera</div>
-            <p class="perm-desc">To photograph physical coupons for scanning via OCR.</p>
+        <div class="feature-card">
+          <div class="feature-icon green">&#128247;</div>
+          <h3>Instant OCR Scanning</h3>
+          <p>Point your camera at any coupon or import from your photo library. On-device AI extracts the company, code, discount, and expiry automatically.</p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon gold">&#128276;</div>
+          <h3>Expiry Reminders</h3>
+          <p>Color-coded urgency chips show which coupons are expiring soon. Optional push notifications alert you days before a deal disappears.</p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon coral">&#128269;</div>
+          <h3>Search, Sort &amp; Filter</h3>
+          <p>Find any coupon instantly. Sort by company, expiry, date added, or highest discount. Filter by category to zero in on what you need.</p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon blue">&#128274;</div>
+          <h3>100% Offline &amp; Private</h3>
+          <p>All data stays on your device. No accounts, no servers, no analytics, no ads. Your coupons are nobody's business but yours.</p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon purple">&#11088;</div>
+          <h3>Favorites &amp; Archive</h3>
+          <p>Pin your go-to coupons for quick access. Used and expired coupons auto-archive so your wallet stays clean.</p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon teal">&#128230;</div>
+          <h3>Export Your Data</h3>
+          <p>Export all your coupons as JSON anytime. Your data belongs to you, and you can take it wherever you want.</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- How It Works -->
+  <section class="how-it-works" id="how-it-works">
+    <div class="how-inner">
+      <div class="how-header">
+        <h2>Three steps to never miss a deal</h2>
+        <p>From paper coupon to organized wallet in seconds.</p>
+      </div>
+      <div class="steps">
+        <div class="step">
+          <div class="step-number">1</div>
+          <div class="step-content">
+            <h3>Scan or snap</h3>
+            <p>Use your camera to scan a physical coupon, or import an image from your photo library. You can also add coupons manually.</p>
           </div>
         </div>
-        <div class="perm-row">
-          <div class="perm-icon">&#128444;</div>
-          <div class="perm-content">
-            <div class="perm-name">Photo Library</div>
-            <p class="perm-desc">To import coupon images from your device's photo library.</p>
+        <div class="step">
+          <div class="step-number">2</div>
+          <div class="step-content">
+            <h3>Review and save</h3>
+            <p>Folio's on-device OCR extracts the details automatically. Review, tweak if needed, add categories and notes, then save.</p>
           </div>
         </div>
-        <div class="perm-row">
-          <div class="perm-icon">&#128276;</div>
-          <div class="perm-content">
-            <div class="perm-name">Notifications</div>
-            <p class="perm-desc">To send local reminders before coupons expire (optional, user-configured).</p>
+        <div class="step">
+          <div class="step-number">3</div>
+          <div class="step-content">
+            <h3>Use before you lose</h3>
+            <p>Browse your organized wallet, get notified before expiry, and tap to copy the code when you're ready to redeem at checkout.</p>
           </div>
         </div>
       </div>
-      <p>You can revoke any permission at any time through your device's system settings. Revoking permissions may limit certain features but will not affect your stored data.</p>
-    </section>
+    </div>
+  </section>
 
-    <!-- How Data Is Used -->
-    <section>
-      <h2>How Your Data Is Used</h2>
-      <ul>
-        <li><strong>OCR Processing</strong> &mdash; When you scan a coupon, on-device ML Kit OCR extracts text from the image. This processing happens entirely on your device. No image or text data is sent to any server.</li>
-        <li><strong>Local Storage</strong> &mdash; All coupon data is stored in a local SQLite database on your device.</li>
-        <li><strong>Notifications</strong> &mdash; If enabled, the app schedules local notifications to remind you of upcoming coupon expirations. These are generated and delivered entirely on-device.</li>
-      </ul>
-    </section>
+  <!-- Privacy -->
+  <section class="privacy-banner" id="privacy">
+    <div class="privacy-card">
+      <h2>Privacy is not a feature. It's the foundation.</h2>
+      <p>Folio was built from day one with the belief that your shopping data should never leave your device.</p>
+      <div class="privacy-badges">
+        <span class="privacy-badge"><span class="check">&#10003;</span> No accounts</span>
+        <span class="privacy-badge"><span class="check">&#10003;</span> No servers</span>
+        <span class="privacy-badge"><span class="check">&#10003;</span> No analytics</span>
+        <span class="privacy-badge"><span class="check">&#10003;</span> No ads</span>
+        <span class="privacy-badge"><span class="check">&#10003;</span> No tracking</span>
+      </div>
+      <a href="privacy-policy.html" class="privacy-link">Read full privacy policy &rarr;</a>
+    </div>
+  </section>
 
-    <!-- Data Retention -->
-    <section>
-      <h2>Data Retention &amp; Deletion</h2>
-      <ul>
-        <li>Your data persists on your device for as long as you use the app.</li>
-        <li>You can delete individual coupons at any time from within the app.</li>
-        <li>Uninstalling Folio removes all app data from your device, including the database and all stored images.</li>
-        <li>There is no cloud backup or remote storage &mdash; once deleted, data cannot be recovered.</li>
-      </ul>
-    </section>
+  <!-- Open Source -->
+  <section class="open-source">
+    <h2>Open source. Fully transparent.</h2>
+    <p>Folio is MIT-licensed. Read every line of code, contribute features, or fork it to make it your own.</p>
+    <a href="https://github.com/suryarjuna/folio" class="btn btn-primary">
+      <svg width="18" height="18" viewBox="0 0 16 16" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
+      View on GitHub
+    </a>
+  </section>
 
-    <!-- Third-Party Services -->
-    <section>
-      <h2>Third-Party Services</h2>
-      <p>Folio does not integrate with any third-party analytics, advertising, crash reporting, or data collection services.</p>
-      <p>The app uses the following open-source libraries for <strong>on-device functionality only</strong>:</p>
-      <ul>
-        <li><strong>ML Kit OCR</strong> (via react-native-mlkit-ocr) &mdash; on-device text recognition. No data is sent to Google or any external service.</li>
-        <li><strong>Expo SDK</strong> &mdash; camera access, image processing, notifications, and file management. All processing is local.</li>
-      </ul>
-    </section>
-
-    <!-- Children's Privacy -->
-    <section>
-      <h2>Children's Privacy</h2>
-      <p>Folio does not knowingly collect information from children under 13. The app does not collect personal information from any user.</p>
-    </section>
-
-    <!-- Changes -->
-    <section>
-      <h2>Changes to This Policy</h2>
-      <p>We may update this Privacy Policy from time to time. Changes will be reflected in the "Last updated" date at the top of this page. Continued use of the app after changes constitutes acceptance of the updated policy.</p>
-    </section>
-
-    <!-- Contact -->
-    <section>
-      <h2>Contact</h2>
-      <p>If you have questions about this Privacy Policy, please open an issue on our GitHub repository:</p>
-      <p><a href="https://github.com/suryarjuna/folio">github.com/suryarjuna/folio</a></p>
-    </section>
-
-    <hr>
-
-    <section>
-      <h2>Open Source</h2>
-      <p>Folio is open-source software licensed under the <a href="https://github.com/suryarjuna/folio/blob/main/LICENSE">MIT License</a>. You can review the complete source code to verify our privacy practices.</p>
-    </section>
-
-  </main>
-
+  <!-- Footer -->
   <footer>
-    <p>Folio &mdash; Coupon Wallet &nbsp;&middot;&nbsp; <a href="https://github.com/suryarjuna/folio">GitHub</a></p>
+    <ul class="footer-links">
+      <li><a href="privacy-policy.html">Privacy Policy</a></li>
+      <li><a href="https://github.com/suryarjuna/folio">GitHub</a></li>
+      <li><a href="https://github.com/suryarjuna/folio/blob/main/LICENSE">MIT License</a></li>
+    </ul>
+    <p class="copyright">Folio &mdash; Coupon Wallet &copy; 2026</p>
   </footer>
 
 </body>

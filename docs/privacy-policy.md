@@ -7,7 +7,7 @@ permalink: /privacy-policy
 # Privacy Policy
 
 **Folio — Coupon Wallet**
-**Last updated:** March 18, 2026
+**Last updated:** March 19, 2026
 
 ## Introduction
 
@@ -51,10 +51,15 @@ You can revoke any of these permissions at any time through your device's system
 - **Local Storage** — All coupon data is stored in a local SQLite database on your device.
 - **Notifications** — If enabled, the app schedules local notifications to remind you of upcoming coupon expirations. These notifications are generated and delivered entirely on-device.
 
+## Data Export
+
+Folio allows you to export all your coupon data as a JSON file via the in-app Share sheet. Exported data includes coupon metadata (company name, code, discount, expiry, categories, notes, and status) but **does not** include images. The export is initiated entirely by you and shared only through channels you choose. Folio does not automatically export, upload, or transmit any data.
+
 ## Data Retention and Deletion
 
 - Your data persists on your device for as long as you use the app.
 - You can delete individual coupons at any time from within the app.
+- You can bulk-delete all expired coupons from the Archive screen.
 - Uninstalling Folio removes all app data from your device, including the database and all stored images.
 - There is no cloud backup or remote storage — once deleted, data cannot be recovered.
 
